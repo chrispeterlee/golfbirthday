@@ -2,26 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Golf Weather on Your Birthday</title>
+  <title>Golf Weather at the K Club</title>
   <style>
     body {
-      font-family: sans-serif;
+      background-color: #2e8b57; /* green fairway color */
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      margin-top: 50px;
+      padding: 40px;
     }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
     input, button {
-      font-size: 16px;
-      padding: 10px;
+      font-size: 1rem;
+      padding: 10px 15px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    input[type="date"] {
+      background-color: #fff;
+      color: #000;
+    }
+
+    button {
+      background-color: #006400;
+      color: white;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 30px;
+      background-color: #3cb371;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .score {
+      font-size: 1.5em;
+      font-weight: bold;
       margin-top: 10px;
     }
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
+
+    .label {
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>What Was the Golf Weather Like the Day You Were Born?</h1>
+  <h1>How was the golfing at the K Club the day you were born?</h1>
   <p>Enter your birthday:</p>
   <input type="date" id="birthday" max="2024-12-31" />
   <br />
@@ -35,11 +70,11 @@
       const resultDiv = document.getElementById("result");
 
       if (!birthday) {
-        resultDiv.textContent = "Please enter your birthday.";
+        resultDiv.innerHTML = "Please enter your birthday.";
         return;
       }
 
-      const latitude = 53.305;    // Approximate K-Club location
+      const latitude = 53.305;
       const longitude = -6.625;
       const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${birthday}&end_date=${birthday}&hourly=temperature_2m,precipitation,windspeed_10m&timezone=Europe%2FDublin`;
 
@@ -47,33 +82,43 @@
         const response = await fetch(url);
         const data = await response.json();
 
+        const times = data.hourly.time;
         const temps = data.hourly.temperature_2m;
         const rains = data.hourly.precipitation;
         const winds = data.hourly.windspeed_10m;
-        const times = data.hourly.time;
 
-        let messages = [];
-
-        for (let i = 0; i < times.length; i++) {
-          const hour = parseInt(times[i].split("T")[1].split(":")[0]);
-          if (hour < 7 || hour > 21) continue;
-
-          const tempPenalty = Math.min(Math.abs(temps[i] - 21) * 1.1, 20);
-          const rainPenalty = Math.min(rains[i] * 5, 50);
-          const windPenalty = Math.min(Math.abs(winds[i] - 5), 30);
-          const score = 100 - (tempPenalty + rainPenalty + windPenalty);
-
-          messages.push(`⏰ ${times[i]} — Golf Score: ${score.toFixed(1)}`);
+        // Find the 12:00 reading
+        const noonIndex = times.findIndex(t => t.includes("12:00"));
+        if (noonIndex === -1) {
+          resultDiv.innerHTML = "No noon weather data available for that date.";
+          return;
         }
 
-        if (messages.length === 0) {
-          resultDiv.innerHTML = "No weather data available for that day.";
-        } else {
-          resultDiv.innerHTML = `<strong>Golf Weather at the K-Club on ${birthday}:</strong><br><br>` + messages.join("<br>");
-        }
+        const temp = temps[noonIndex];
+        const rain = rains[noonIndex];
+        const wind = winds[noonIndex];
+
+        const tempPenalty = Math.min(Math.abs(temp - 21) * 1.1, 20);
+        const rainPenalty = Math.min(rain * 5, 50);
+        const windPenalty = Math.min(Math.abs(wind - 5), 30);
+        const golfScore = 100 - (tempPenalty + rainPenalty + windPenalty);
+
+        resultDiv.innerHTML = `
+          <div class="label">📍 K Club at Noon on ${birthday}</div><br>
+          🌡️ Temperature: ${temp.toFixed(1)} °C <br>
+          🌧️ Rainfall: ${rain.toFixed(1)} mm <br>
+          💨 Wind Speed: ${wind.toFixed(1)} km/h <br><br>
+
+          <div class="label">Scoring Penalties:</div>
+          🟠 Temp Penalty: ${tempPenalty.toFixed(1)} pts<br>
+          🔵 Rain Penalty: ${rainPenalty.toFixed(1)} pts<br>
+          🟣 Wind Penalty: ${windPenalty.toFixed(1)} pts<br><br>
+
+          <div class="score">🏌️ Golf Score: ${golfScore.toFixed(1)} / 100</div>
+        `;
       } catch (error) {
-        resultDiv.textContent = "Failed to fetch weather data.";
         console.error(error);
+        resultDiv.innerHTML = "Something went wrong. Try a different date.";
       }
     }
   </script>
