@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Golf Weather on Your Birthday</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input, button {
+      font-size: 16px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>What Was the Golf Weather Like the Day You Were Born?</h1>
+  <p>Enter your birthday:</p>
+  <input type="date" id="birthday" max="2024-12-31" />
+  <br />
+  <button onclick="checkGolfWeather()">Check Weather</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    async function checkGolfWeather() {
+      const birthday = document.getElementById("birthday").value;
+      const resultDiv = document.getElementById("result");
+
+      if (!birthday) {
+        resultDiv.textContent = "Please enter your birthday.";
+        return;
+      }
+
+      const latitude = 53.305;    // Approximate K-Club location
+      const longitude = -6.625;
+      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${birthday}&end_date=${birthday}&hourly=temperature_2m,precipitation,windspeed_10m&timezone=Europe%2FDublin`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const temps = data.hourly.temperature_2m;
+        const rains = data.hourly.precipitation;
+        const winds = data.hourly.windspeed_10m;
+        const times = data.hourly.time;
+
+        let messages = [];
+
+        for (let i = 0; i < times.length; i++) {
+          const hour = parseInt(times[i].split("T")[1].split(":")[0]);
+          if (hour < 7 || hour > 21) continue;
+
+          const tempPenalty = Math.min(Math.abs(temps[i] - 21) * 1.1, 20);
+          const rainPenalty = Math.min(rains[i] * 5, 50);
+          const windPenalty = Math.min(Math.abs(winds[i] - 5), 30);
+          const score = 100 - (tempPenalty + rainPenalty + windPenalty);
+
+          messages.push(`⏰ ${times[i]} — Golf Score: ${score.toFixed(1)}`);
+        }
+
+        if (messages.length === 0) {
+          resultDiv.innerHTML = "No weather data available for that day.";
+        } else {
+          resultDiv.innerHTML = `<strong>Golf Weather at the K-Club on ${birthday}:</strong><br><br>` + messages.join("<br>");
+        }
+      } catch (error) {
+        resultDiv.textContent = "Failed to fetch weather data.";
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
