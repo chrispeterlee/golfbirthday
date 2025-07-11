@@ -14,7 +14,7 @@
 
     h1 {
       font-size: 2em;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     label, select, button {
@@ -51,14 +51,10 @@
   <h1>How was the golfing at the K Club on this date in history?</h1>
 
   <label for="month">Month:</label>
-  <select id="month">
-    ${[...Array(12)].map((_, i) => `<option value="${(i+1).toString().padStart(2, '0')}">${new Date(0, i).toLocaleString('default', { month: 'long' })}</option>`).join('')}
-  </select>
+  <select id="month"></select>
 
   <label for="day">Day:</label>
-  <select id="day">
-    ${[...Array(31)].map((_, i) => `<option value="${(i+1).toString().padStart(2, '0')}">${i+1}</option>`).join('')}
-  </select>
+  <select id="day"></select>
 
   <br />
   <button onclick="analyzeGolfHistory()">Check History</button>
@@ -67,6 +63,24 @@
   <div class="results" id="results"></div>
 
   <script>
+    // Populate month and day dropdowns
+    const monthSelect = document.getElementById("month");
+    const daySelect = document.getElementById("day");
+
+    for (let i = 0; i < 12; i++) {
+      const option = document.createElement("option");
+      option.value = (i + 1).toString().padStart(2, '0');
+      option.text = new Date(0, i).toLocaleString('default', { month: 'long' });
+      monthSelect.appendChild(option);
+    }
+
+    for (let i = 1; i <= 31; i++) {
+      const option = document.createElement("option");
+      option.value = i.toString().padStart(2, '0');
+      option.text = i;
+      daySelect.appendChild(option);
+    }
+
     async function analyzeGolfHistory() {
       const month = document.getElementById("month").value;
       const day = document.getElementById("day").value;
@@ -126,6 +140,11 @@
         <strong>📅 Full History:</strong><br>
         ${scores.map(s => `${s.year}: ${s.score.toFixed(1)}`).join('<br>')}
       `;
+    }
+  </script>
+</body>
+</html>
+
     }
   </script>
 </body>
