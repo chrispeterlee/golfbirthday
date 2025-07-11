@@ -1,148 +1,173 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <title>Golf History at Irish Courses</title>
+  <style>
+    body {
+      background-color: #2e8b57;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    label, select, button {
+      font-size: 1rem;
+      margin: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #006400;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .results {
+      margin-top: 30px;
+      background-color: #3cb371;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .loading {
+      font-style: italic;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;K Club Golf History&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #2e8b57;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: 'Segoe UI', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 2em;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>label, select, button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #006400;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.results {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #3cb371;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 600px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: left;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.loading {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-style: italic;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;How was the golfing at the K Club on this date in history?&lt;/h1&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;label for="month"&gt;Month:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;select id="month"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>${[...Array(12)].map((_, i) =&gt; `&lt;option value="${(i+1).toString().padStart(2, '0')}"&gt;${new Date(0, i).toLocaleString('default', { month: 'long' })}&lt;/option&gt;`).join('')}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/select&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;label for="day"&gt;Day:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;select id="day"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>${[...Array(31)].map((_, i) =&gt; `&lt;option value="${(i+1).toString().padStart(2, '0')}"&gt;${i+1}&lt;/option&gt;`).join('')}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/select&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;button onclick="analyzeGolfHistory()"&gt;Check History&lt;/button&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="loading" id="loading"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="results" id="results"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>async function analyzeGolfHistory() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const month = document.getElementById("month").value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const day = document.getElementById("day").value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const loading = document.getElementById("loading");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const results = document.getElementById("results");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>results.innerHTML = "";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>loading.innerText = "Analyzing 46 years of golf weather... please wait ⛳";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const scores = [];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>for (let year = 1979; year &lt;= 2024; year++) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const date = `${year}-${month}-${day}`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const url = `https://archive-api.open-meteo.com/v1/archive?latitude=53.305&amp;longitude=-6.625&amp;start_date=${date}&amp;end_date=${date}&amp;hourly=temperature_2m,precipitation,windspeed_10m&amp;timezone=Europe%2FDublin`;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const response = await fetch(url);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const data = await response.json();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const noonIndex = data.hourly.time.findIndex(t =&gt; t.includes("12:00"));</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (noonIndex === -1) continue;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const temp = data.hourly.temperature_2m[noonIndex];</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const rain = data.hourly.precipitation[noonIndex];</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const wind = data.hourly.windspeed_10m[noonIndex];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const tempPenalty = Math.min(Math.abs(temp - 21) * 1.1, 20);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const rainPenalty = Math.min(rain * 5, 50);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const windPenalty = Math.min(Math.abs(wind - 5), 30);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const golfScore = 100 - (tempPenalty + rainPenalty + windPenalty);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>scores.push({ year, score: golfScore });</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>} catch (e) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>console.error("Error fetching year:", year, e);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (scores.length === 0) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>loading.innerText = "";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>results.innerHTML = "No weather data available for that day.";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const average = (scores.reduce((sum, s) =&gt; sum + s.score, 0) / scores.length).toFixed(1);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const sorted = [...scores].sort((a, b) =&gt; a.score - b.score);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const median = sorted[Math.floor(sorted.length / 2)].score.toFixed(1);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const best = sorted[sorted.length - 1];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const worst = sorted[0];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>loading.innerText = "";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>results.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;📅 Date:&lt;/strong&gt; ${month}-${day} &lt;br&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;📊 Average Golf Score:&lt;/strong&gt; ${average} &lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;📈 Median Golf Score:&lt;/strong&gt; ${median} &lt;br&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;🏆 Best Year:&lt;/strong&gt; ${best.year} (${best.score.toFixed(1)}) &lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;💩 Worst Year:&lt;/strong&gt; ${worst.year} (${worst.score.toFixed(1)}) &lt;br&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;📅 Full History:&lt;/strong&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>${scores.map(s =&gt; `${s.year}: ${s.score.toFixed(1)}`).join('&lt;br&gt;')}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <h1>How was the golfing at Irish courses on this date in history?</h1>
+
+  <label for="course">Course:</label>
+  <select id="course"></select>
+
+  <label for="month">Month:</label>
+  <select id="month"></select>
+
+  <label for="day">Day:</label>
+  <select id="day"></select>
+
+  <br />
+  <button onclick="analyzeGolfHistory()">Check History</button>
+
+  <div class="loading" id="loading"></div>
+  <div class="results" id="results"></div>
+
+  <script>
+    const courses = {
+      "K Club": { lat: 53.305, lon: -6.625 },
+      "Lahinch": { lat: 52.935, lon: -9.345 },
+      "Portmarnock": { lat: 53.407, lon: -6.120 },
+      "Royal County Down": { lat: 54.209, lon: -5.889 },
+      "Ballybunion": { lat: 52.511, lon: -9.671 },
+      "Tralee": { lat: 52.280, lon: -9.865 },
+      "Royal Portrush": { lat: 55.203, lon: -6.651 },
+      "Carton House": { lat: 53.392, lon: -6.561 }
+    };
+
+    const courseSelect = document.getElementById("course");
+    const monthSelect = document.getElementById("month");
+    const daySelect = document.getElementById("day");
+
+    for (const name in courses) {
+      const option = document.createElement("option");
+      option.value = name;
+      option.text = name;
+      courseSelect.appendChild(option);
+    }
+
+    for (let i = 0; i < 12; i++) {
+      const option = document.createElement("option");
+      option.value = (i + 1).toString().padStart(2, '0');
+      option.text = new Date(0, i).toLocaleString('default', { month: 'long' });
+      monthSelect.appendChild(option);
+    }
+
+    for (let i = 1; i <= 31; i++) {
+      const option = document.createElement("option");
+      option.value = i.toString().padStart(2, '0');
+      option.text = i;
+      daySelect.appendChild(option);
+    }
+
+    async function analyzeGolfHistory() {
+      const course = courseSelect.value;
+      const { lat, lon } = courses[course];
+      const month = monthSelect.value;
+      const day = daySelect.value;
+      const loading = document.getElementById("loading");
+      const results = document.getElementById("results");
+
+      results.innerHTML = "";
+      loading.innerText = `Analyzing 46 years of golf weather at ${course}... please wait ⛳`;
+
+      const scores = [];
+
+      for (let year = 1979; year <= 2024; year++) {
+        const date = `${year}-${month}-${day}`;
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&hourly=temperature_2m,precipitation,windspeed_10m&timezone=Europe%2FDublin`;
+
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+
+          const noonIndex = data.hourly.time.findIndex(t => t.includes("12:00"));
+          if (noonIndex === -1) continue;
+
+          const temp = data.hourly.temperature_2m[noonIndex];
+          const rain = data.hourly.precipitation[noonIndex];
+          const wind = data.hourly.windspeed_10m[noonIndex];
+
+          const tempPenalty = Math.min(Math.abs(temp - 21) * 1.1, 20);
+          const rainPenalty = Math.min(rain * 5, 50);
+          const windPenalty = Math.min(Math.abs(wind - 5), 30);
+          const golfScore = 100 - (tempPenalty + rainPenalty + windPenalty);
+
+          scores.push({ year, score: golfScore });
+
+        } catch (e) {
+          console.error("Error fetching year:", year, e);
+        }
+      }
+
+      if (scores.length === 0) {
+        loading.innerText = "";
+        results.innerHTML = "No weather data available for that day.";
+        return;
+      }
+
+      const average = (scores.reduce((sum, s) => sum + s.score, 0) / scores.length).toFixed(1);
+      const sorted = [...scores].sort((a, b) => a.score - b.score);
+      const median = sorted[Math.floor(sorted.length / 2)].score.toFixed(1);
+      const bestFive = sorted.slice(-5).reverse();
+      const worstFive = sorted.slice(0, 5);
+
+      loading.innerText = "";
+      results.innerHTML = `
+        <strong>📍 Course:</strong> ${course}<br>
+        <strong>📅 Date:</strong> ${month}-${day} <br><br>
+        <strong>📊 Average Golf Score:</strong> ${average} <br>
+        <strong>📈 Median Golf Score:</strong> ${median} <br><br>
+
+        <strong>🏆 Top 5 Best Years:</strong><br>
+        ${bestFive.map(s => `✔️ ${s.year}: ${s.score.toFixed(1)}`).join('<br>')}<br><br>
+
+        <strong>💩 Bottom 5 Worst Years:</strong><br>
+        ${worstFive.map(s => `❌ ${s.year}: ${s.score.toFixed(1)}`).join('<br>')}
+      `;
+    }
+  </script>
 </body>
 </html>
