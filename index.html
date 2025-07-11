@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>K Club Golf History</title>
+  <title>Golf History at Irish Courses</title>
   <style>
     body {
       background-color: #2e8b57;
@@ -48,7 +48,10 @@
   </style>
 </head>
 <body>
-  <h1>How was the golfing at the K Club on this date in history?</h1>
+  <h1>How was the golfing at Irish courses on this date in history?</h1>
+
+  <label for="course">Course:</label>
+  <select id="course"></select>
 
   <label for="month">Month:</label>
   <select id="month"></select>
@@ -63,9 +66,27 @@
   <div class="results" id="results"></div>
 
   <script>
-    // Populate month and day dropdowns
+    const courses = {
+      "K Club": { lat: 53.305, lon: -6.625 },
+      "Lahinch": { lat: 52.935, lon: -9.345 },
+      "Portmarnock": { lat: 53.407, lon: -6.120 },
+      "Royal County Down": { lat: 54.209, lon: -5.889 },
+      "Ballybunion": { lat: 52.511, lon: -9.671 },
+      "Tralee": { lat: 52.280, lon: -9.865 },
+      "Royal Portrush": { lat: 55.203, lon: -6.651 },
+      "Carton House": { lat: 53.392, lon: -6.561 }
+    };
+
+    const courseSelect = document.getElementById("course");
     const monthSelect = document.getElementById("month");
     const daySelect = document.getElementById("day");
+
+    for (const name in courses) {
+      const option = document.createElement("option");
+      option.value = name;
+      option.text = name;
+      courseSelect.appendChild(option);
+    }
 
     for (let i = 0; i < 12; i++) {
       const option = document.createElement("option");
@@ -82,18 +103,21 @@
     }
 
     async function analyzeGolfHistory() {
-      const month = document.getElementById("month").value;
-      const day = document.getElementById("day").value;
+      const course = courseSelect.value;
+      const { lat, lon } = courses[course];
+      const month = monthSelect.value;
+      const day = daySelect.value;
       const loading = document.getElementById("loading");
       const results = document.getElementById("results");
+
       results.innerHTML = "";
-      loading.innerText = "Analyzing 46 years of golf weather... please wait ⛳";
+      loading.innerText = `Analyzing 46 years of golf weather at ${course}... please wait ⛳`;
 
       const scores = [];
 
       for (let year = 1979; year <= 2024; year++) {
         const date = `${year}-${month}-${day}`;
-        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=53.305&longitude=-6.625&start_date=${date}&end_date=${date}&hourly=temperature_2m,precipitation,windspeed_10m&timezone=Europe%2FDublin`;
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&hourly=temperature_2m,precipitation,windspeed_10m&timezone=Europe%2FDublin`;
 
         try {
           const response = await fetch(url);
@@ -127,24 +151,22 @@
       const average = (scores.reduce((sum, s) => sum + s.score, 0) / scores.length).toFixed(1);
       const sorted = [...scores].sort((a, b) => a.score - b.score);
       const median = sorted[Math.floor(sorted.length / 2)].score.toFixed(1);
-      const best = sorted[sorted.length - 1];
-      const worst = sorted[0];
+      const bestFive = sorted.slice(-5).reverse();
+      const worstFive = sorted.slice(0, 5);
 
       loading.innerText = "";
       results.innerHTML = `
+        <strong>📍 Course:</strong> ${course}<br>
         <strong>📅 Date:</strong> ${month}-${day} <br><br>
         <strong>📊 Average Golf Score:</strong> ${average} <br>
         <strong>📈 Median Golf Score:</strong> ${median} <br><br>
-        <strong>🏆 Best Year:</strong> ${best.year} (${best.score.toFixed(1)}) <br>
-        <strong>💩 Worst Year:</strong> ${worst.year} (${worst.score.toFixed(1)}) <br><br>
-        <strong>📅 Full History:</strong><br>
-        ${scores.map(s => `${s.year}: ${s.score.toFixed(1)}`).join('<br>')}
-      `;
-    }
-  </script>
-</body>
-</html>
 
+        <strong>🏆 Top 5 Best Years:</strong><br>
+        ${bestFive.map(s => `✔️ ${s.year}: ${s.score.toFixed(1)}`).join('<br>')}<br><br>
+
+        <strong>💩 Bottom 5 Worst Years:</strong><br>
+        ${worstFive.map(s => `❌ ${s.year}: ${s.score.toFixed(1)}`).join('<br>')}
+      `;
     }
   </script>
 </body>
