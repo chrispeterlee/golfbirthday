@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Our Weather Scoring - GolfGuard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f9f0;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #e6f3e6, #c2e3c2);
+        }
+        .score-good {
+            background: linear-gradient(to right, #10b981, #34d399);
+        }
+        .score-fair {
+            background: linear-gradient(to right, #f59e0b, #fbbf24);
+        }
+        .score-bad {
+            background: linear-gradient(to right, #ef4444, #f87171);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="gradient-bg">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="/" class="text-xl sm:text-2xl font-bold text-green-800 hover:text-green-900">GolfGuard</a>
+            <div class="space-x-2 sm:space-x-4">
+                <a href="/" class="text-green-700 hover:text-green-900 text-sm sm:text-base">Home</a>
+                <a href="/about.html" class="text-green-700 hover:text-green-900 text-sm sm:text-base font-bold">About</a>
+                <a href="#" class="text-green-700 hover:text-green-900 text-sm sm:text-base">Services</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl sm:text-5xl font-bold text-green-900 mb-4">The GolfGuard Weather Score</h1>
+            <p class="text-lg sm:text-xl text-green-700 max-w-3xl mx-auto">
+                Because there's more to golf weather than just checking if it's raining
+            </p>
+        </div>
+
+        <!-- The Problem Section -->
+        <section class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-green-800 mb-6">Why Traditional Weather Insurance Falls Short</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-gray-700 mb-4">
+                        Most of our competitors take a simplistic approach: if it rains, you get paid. But ask any golfer, 
+                        and they'll tell you that rain is just one piece of the puzzle.
+                    </p>
+                    <p class="text-gray-700">
+                        A light drizzle on a warm, windless day? That's still playable golf. But combine that same drizzle 
+                        with 40km/h winds and 8°C temperatures? That's a different story entirely.
+                    </p>
+                </div>
+                <div class="bg-amber-50 p-6 rounded-lg">
+                    <h3 class="font-bold text-amber-800 mb-3">Traditional Insurance Misses:</h3>
+                    <ul class="space-y-2 text-amber-700">
+                        <li class="flex items-start">
+                            <span class="mr-2">❌</span>
+                            <span>Gale-force winds that turn your ball into a ping-pong ball</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">❌</span>
+                            <span>Freezing temperatures that make gripping a club painful</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">❌</span>
+                            <span>The miserable combination of cold, wet, AND windy</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">❌</span>
+                            <span>Extreme heat that makes 18 holes a health hazard</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Solution Section -->
+        <section class="bg-green-50 rounded-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-green-800 mb-6">Our Solution: The Good Golf Index™</h2>
+            <div class="mb-6">
+                <p class="text-gray-700 mb-4">
+                    We surveyed <strong>10,000 golfers</strong> across Ireland and the UK to understand what really makes 
+                    or breaks a golf day. We asked about their ideal conditions, their nightmare scenarios, and everything in between.
+                </p>
+                <p class="text-gray-700">
+                    The result? A sophisticated scoring system that considers the <em>combination</em> of weather factors, 
+                    not just individual elements. Because real golfers know: it's not just about the weather, it's about 
+                    how all the conditions work together.
+                </p>
+            </div>
+        </section>
+
+        <!-- The Magic Number Section -->
+        <section class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-green-800 mb-4">The Magic Number: 55</h2>
+                <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-red-100 border-4 border-red-500">
+                    <span class="text-4xl font-bold text-red-700">55</span>
+                </div>
+                <p class="mt-4 text-lg text-gray-700">
+                    When our weather score drops below 55, that's when we pay out.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="text-center p-4 rounded-lg score-good text-white">
+                    <h3 class="font-bold text-lg mb-2">Great Golf (70-100)</h3>
+                    <p class="text-sm">Perfect conditions. You'll be talking about this round for years.</p>
+                </div>
+                <div class="text-center p-4 rounded-lg score-fair text-white">
+                    <h3 class="font-bold text-lg mb-2">Playable (55-70)</h3>
+                    <p class="text-sm">Not ideal, but you're still having fun out there.</p>
+                </div>
+                <div class="text-center p-4 rounded-lg score-bad text-white">
+                    <h3 class="font-bold text-lg mb-2">Miserable (0-55)</h3>
+                    <p class="text-sm">Time to head to the clubhouse. We've got you covered.</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg">
+                <h3 class="font-bold text-gray-800 mb-3">Why 55?</h3>
+                <p class="text-gray-700">
+                    Our research showed that when conditions score below 55, <strong>87% of golfers</strong> either 
+                    abandon their round or wish they had never left the clubhouse. It's the tipping point where 
+                    golf stops being fun and starts being an endurance test.
+                </p>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-green-800 mb-6">How We Calculate Your Score</h2>
+            
+            <div class="space-y-6">
+                <!-- Temperature -->
+                <div class="border-l-4 border-green-500 pl-6">
+                    <h3 class="font-bold text-lg text-green-700 mb-2">🌡️ Temperature (Max 30 point penalty)</h3>
+                    <p class="text-gray-700 mb-2">
+                        <strong>Ideal:</strong> 21°C - The perfect golf temperature according to our survey
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        We deduct 1.5 points for every degree away from ideal. Too hot is just as bad as too cold!
+                    </p>
+                </div>
+
+                <!-- Rain -->
+                <div class="border-l-4 border-blue-500 pl-6">
+                    <h3 class="font-bold text-lg text-blue-700 mb-2">🌧️ Rainfall (Max 50 point penalty)</h3>
+                    <p class="text-gray-700 mb-2">
+                        <strong>Ideal:</strong> 0mm - Nobody dreams of playing in the rain
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        We deduct 10 points per mm of rain per hour. Heavy rain can tank your score fast!
+                    </p>
+                </div>
+
+                <!-- Wind -->
+                <div class="border-l-4 border-yellow-500 pl-6">
+                    <h3 class="font-bold text-lg text-yellow-700 mb-2">💨 Wind Speed (Max 40 point penalty)</h3>
+                    <p class="text-gray-700 mb-2">
+                        <strong>Ideal:</strong> 5 km/h - Just enough for a satisfying flag ripple
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        We deduct 2 points for every km/h difference from ideal. Calm or gale, both hurt your game!
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-green-50 p-6 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-3">The Formula</h3>
+                <code class="block bg-white p-4 rounded text-sm mb-4">
+                    Score = 100 - (Temperature Penalty + Rain Penalty + Wind Penalty)
+                </code>
+                <p class="text-gray-700">
+                    Starting from a perfect 100, we subtract penalties for each weather factor. The worse the 
+                    combination, the lower your score. Simple, fair, and based on what real golfers actually care about.
+                </p>
+            </div>
+        </section>
+
+        <!-- Real Examples Section -->
+        <section class="bg-gray-50 rounded-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Real-World Examples</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-green-700 mb-3">✅ Score: 72 - No Payout</h3>
+                    <p class="text-gray-600 mb-3">"A bit fresh, but definitely playable"</p>
+                    <ul class="space-y-1 text-sm text-gray-700">
+                        <li>🌡️ Temperature: 16°C (7.5 point penalty)</li>
+                        <li>🌧️ Rain: 0.5mm (5 point penalty)</li>
+                        <li>💨 Wind: 15 km/h (20 point penalty)</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600">
+                        Light jacket weather with a tiny drizzle. Not perfect, but you're still enjoying your round.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-red-700 mb-3">❌ Score: 38 - Payout Triggered</h3>
+                    <p class="text-gray-600 mb-3">"Why did we even leave the car?"</p>
+                    <ul class="space-y-1 text-sm text-gray-700">
+                        <li>🌡️ Temperature: 8°C (19.5 point penalty)</li>
+                        <li>🌧️ Rain: 3mm (30 point penalty)</li>
+                        <li>💨 Wind: 25 km/h (40 point penalty)</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600">
+                        Cold, wet, and blowing a gale. This is survival golf, not fun golf. Time to claim!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Stats Section -->
+        <section class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-green-800 mb-6">Fun Facts from Our Research</h2>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-green-50 rounded-lg">
+                    <p class="text-3xl font-bold text-green-700">73%</p>
+                    <p class="text-sm text-gray-600">of golfers would rather play in 5°C sunshine than 20°C rain</p>
+                </div>
+                <div class="text-center p-4 bg-blue-50 rounded-lg">
+                    <p class="text-3xl font-bold text-blue-700">2.3mm</p>
+                    <p class="text-sm text-gray-600">average rainfall before golfers start complaining</p>
+                </div>
+                <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                    <p class="text-3xl font-bold text-yellow-700">28 km/h</p>
+                    <p class="text-sm text-gray-600">wind speed where 90% say "this isn't fun anymore"</p>
+                </div>
+                <div class="text-center p-4 bg-red-50 rounded-lg">
+                    <p class="text-3xl font-bold text-red-700">11°C</p>
+                    <p class="text-sm text-gray-600">temperature where beer sales overtake coffee at the clubhouse</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="gradient-bg rounded-lg p-8 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-green-900 mb-4">
+                Ready to Protect Your Next Round?
+            </h2>
+            <p class="text-lg text-green-700 mb-6 max-w-2xl mx-auto">
+                Our weather scoring system is fair, transparent, and designed by golfers, for golfers. 
+                No more arguing about whether it was "bad enough" - if it scores below 55, we pay out. Simple as that.
+            </p>
+            <a href="/" class="inline-block bg-green-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-800 transition duration-300">
+                Get Your Quote Now
+            </a>
+        </section>
+
+        <!-- Disclaimer -->
+        <div class="mt-8 text-center text-sm text-gray-600">
+            <p>
+                * The Good Golf Index™ is totally made up for this demo, but we think it's pretty clever anyway. 
+                No actual golfers were surveyed in the making of this scoring system. 
+                Beer sales statistics at 11°C are purely speculative.
+            </p>
+        </div>
+    </main>
+
+    <footer class="bg-green-50 py-8 mt-16">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <p class="text-green-800">© 2025 GolfGuard Insurance. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/" class="text-green-600 hover:text-green-800 text-sm">Home</a>
+                <a href="/about.html" class="text-green-600 hover:text-green-800 text-sm font-bold">About (You Are Here)</a>
+                <a href="/privacy.html" class="text-green-600 hover:text-green-800 text-sm">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
