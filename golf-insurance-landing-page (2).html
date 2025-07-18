@@ -227,27 +227,8 @@
         </div>
     </div>
 
-    <script>
-        const courses = {
-            "Abbeyleix Golf Club": { lat: 52.9169, lon: -7.5028 },
-            "Achill Island Golf Club": { lat: 53.9559, lon: -10.0572 },
-            "Adare Golf Club": { lat: 52.5539, lon: -8.7972 },
-            "Allen Park Golf Centre": { lat: 53.3864, lon: -6.3644 },
-            "Ardeer Golf Club": { lat: 55.7039, lon: -4.7125 },
-            "Ardglass Golf Club": { lat: 54.2858, lon: -5.4972 },
-            "Ardminnan Golf Club": { lat: 54.3483, lon: -6.6528 },
-            "Arklow Golf Club": { lat: 52.7942, lon: -6.1417 },
-            "Ashbourne Golf Club": { lat: 53.5014, lon: -6.4228 },
-            "Ashfield Golf Course": { lat: 54.5833, lon: -5.8333 },
-            "Ashford Castle Golf Club": { lat: 53.5464, lon: -9.2944 },
-            "Athenry Golf Club": { lat: 53.3008, lon: -8.7478 },
-            "Athlone Golf Club": { lat: 53.4239, lon: -7.9407 },
-            "Athy Golf Club": { lat: 52.9869, lon: -6.5892 },
-            "Aughnacloy Golf Club": { lat: 54.4197, lon: -6.7553 },
-            "Ballybunion - Old Course": { lat: 52.5047, lon: -9.8828 },
-            "Lahinch - Old Course": { lat: 52.9333, lon: -9.4000 },
-            "Royal County Down - Championship Course": { lat: 54.2000, lon: -5.9000 }
-        };
+   <!-- Load courses from a separate JS file -->
+    <script src="course.js"></script>
 
         const courseCombo = document.getElementById('courseCombo');
         const courseComboList = document.getElementById('courseComboList');
