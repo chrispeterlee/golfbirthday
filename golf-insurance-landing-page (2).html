@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Day Insurance - GolfGuard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f9f0;
+        /* Custom slider styles */
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #16a34a;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #16a34a;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        /* For combobox */
+        .combo-list { z-index: 50; }
+        .combo-list li[aria-selected="true"] { background: #d1fae5; }
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1593491259871-bdd2a5ddd7e2');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(240,249,240,0.9), rgba(240,249,240,0.7));
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #e6f3e6, #c2e3c2);
+        }
+        .quote-card {
+            background-color: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,128,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,128,0,0.1);
+        }
+        .loading-spinner {
+            border-top-color: #38a169;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="gradient-bg">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <div class="text-xl sm:text-2xl font-bold text-green-800">GolfGuard</div>
+            <div class="space-x-2 sm:space-x-4">
+                <a href="#" class="text-green-700 hover:text-green-900 text-sm sm:text-base">Home</a>
+                <a href="#" class="text-green-700 hover:text-green-900 text-sm sm:text-base">About</a>
+                <a href="#" class="text-green-700 hover:text-green-900 text-sm sm:text-base">Services</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <div class="hero-bg rounded-lg sm:rounded-2xl overflow-hidden">
+            <div class="hero-overlay">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="w-full lg:w-1/2 p-6 sm:p-8 lg:pr-12 lg:pl-12 lg:py-16">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-900 mb-4 sm:mb-6">Golf Day Insurance</h1>
+                        <p class="text-lg sm:text-xl text-green-800 mb-6 sm:mb-8">
+                            Protect your golf day from unpredictable weather. We'll reimburse you if the conditions ruin your round.
+                        </p>
+                        <ul class="mb-6 sm:mb-8 space-y-2 sm:space-y-3 text-green-700">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Instant online quotes</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Coverage for all Irish golf courses</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Historical weather risk analysis</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-full lg:w-1/2 p-4 sm:p-6 lg:pr-12">
+                        <div class="quote-card p-6 sm:p-8 rounded-lg shadow-xl">
+                            <h2 class="text-2xl sm:text-3xl text-green-900 mb-4 sm:mb-6 text-center">Get Your Quote</h2>
+                            
+                            <!-- Combobox for Course Search & Select -->
+                            <div class="mb-4 relative">
+                                <label for="courseCombo" class="block text-green-800 mb-2 text-sm sm:text-base">Choose your course:</label>
+                                <input type="text" id="courseCombo" autocomplete="off"
+                                    placeholder="Start typing to search courses..."
+                                    class="w-full px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base">
+                                <ul id="courseComboList"
+                                    class="combo-list absolute z-20 bg-white w-full border border-green-200 rounded-md mt-1 max-h-48 overflow-auto shadow-lg hidden"></ul>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="month" class="block text-green-800 mb-2 text-sm sm:text-base">Choose a month:</label>
+                                    <select id="month" class="w-full px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base">
+                                        <!-- Months will be populated dynamically -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="day" class="block text-green-800 mb-2 text-sm sm:text-base">Choose a day:</label>
+                                    <select id="day" class="w-full px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base">
+                                        <!-- Days will be populated dynamically -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="hour" class="block text-green-800 mb-2 text-sm sm:text-base">Tee time (hour):</label>
+                                <select id="hour" class="w-full px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base">
+                                    <!-- Hours will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <!-- Payout Amount Slider -->
+                            <div class="mb-6">
+                                <label for="payoutAmount" class="block text-green-800 mb-2 text-sm sm:text-base">
+                                    Payout Amount: €<span id="payoutValue">500</span>
+                                </label>
+                                <input type="range" id="payoutAmount" min="0" max="1000" value="500" step="50"
+                                       class="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer slider">
+                                <div class="flex justify-between text-xs text-gray-600 mt-1">
+                                    <span>€0</span>
+                                    <span>€500</span>
+                                    <span>€1000</span>
+                                </div>
+                            </div>
+
+                            <!-- Weather Threshold Slider -->
+                            <div class="mb-6">
+                                <label for="weatherThreshold" class="block text-green-800 mb-2 text-sm sm:text-base">
+                                    Weather Threshold: <span id="thresholdValue">55</span>
+                                </label>
+                                <input type="range" id="weatherThreshold" min="10" max="90" value="55" step="5"
+                                       class="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer slider">
+                                <div class="flex justify-between text-xs text-gray-600 mt-1">
+                                    <span>10</span>
+                                    <span>50</span>
+                                    <span>90</span>
+                                </div>
+                                <p id="thresholdDescription" class="text-sm text-gray-600 mt-2 italic text-center">
+                                    "We're reasonable golfers who expect decent conditions"
+                                </p>
+                            </div>
+
+                            <button onclick="getQuote()" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-300 text-sm sm:text-base">
+                                Calculate Quote
+                            </button>
+
+                            <div id="quoteResult" class="mt-6 p-4 bg-green-50 rounded-md text-center relative min-h-[60px]">
+                                Your quote will appear here
+                                <div id="loadingSpinner" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <div class="w-8 h-8 border-4 border-green-200 border-t-green-600 rounded-full loading-spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Container for detailed analysis -->
+        <div id="detailsContainer"></div>
+    </main>
+
+    <footer class="bg-green-50 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-green-800">© 2025 GolfGuard Insurance. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="hidden fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl p-6 sm:p-8 w-full max-w-md mx-auto">
+            <h3 class="text-xl sm:text-2xl font-bold text-green-900 mb-4">Coming Soon!</h3>
+            <p class="text-gray-700 mb-6 text-sm sm:text-base">
+                We're working hard to bring you golf day weather insurance. Be the first to know when we launch!
+            </p>
+            <form id="emailForm" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="email" name="email" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
+                           placeholder="your@email.com">
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                    <button type="submit" class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-300 text-sm sm:text-base">
+                        Notify Me
+                    </button>
+                    <button type="button" onclick="closePurchaseModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-300 text-sm sm:text-base">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+            <div id="successMessage" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-md text-sm sm:text-base">
+                Thank you! We'll notify you when GolfGuard launches.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const courses = {
+            "Abbeyleix Golf Club": { lat: 52.9169, lon: -7.5028 },
+            "Achill Island Golf Club": { lat: 53.9559, lon: -10.0572 },
+            "Adare Golf Club": { lat: 52.5539, lon: -8.7972 },
+            "Allen Park Golf Centre": { lat: 53.3864, lon: -6.3644 },
+            "Ardeer Golf Club": { lat: 55.7039, lon: -4.7125 },
+            "Ardglass Golf Club": { lat: 54.2858, lon: -5.4972 },
+            "Ardminnan Golf Club": { lat: 54.3483, lon: -6.6528 },
+            "Arklow Golf Club": { lat: 52.7942, lon: -6.1417 },
+            "Ashbourne Golf Club": { lat: 53.5014, lon: -6.4228 },
+            "Ashfield Golf Course": { lat: 54.5833, lon: -5.8333 },
+            "Ashford Castle Golf Club": { lat: 53.5464, lon: -9.2944 },
+            "Athenry Golf Club": { lat: 53.3008, lon: -8.7478 },
+            "Athlone Golf Club": { lat: 53.4239, lon: -7.9407 },
+            "Athy Golf Club": { lat: 52.9869, lon: -6.5892 },
+            "Aughnacloy Golf Club": { lat: 54.4197, lon: -6.7553 },
+            "Ballybunion - Old Course": { lat: 52.5047, lon: -9.8828 },
+            "Lahinch - Old Course": { lat: 52.9333, lon: -9.4000 },
+            "Royal County Down - Championship Course": { lat: 54.2000, lon: -5.9000 }
+        };
+
+        const courseCombo = document.getElementById('courseCombo');
+        const courseComboList = document.getElementById('courseComboList');
+        const monthSelect = document.getElementById("month");
+        const daySelect = document.getElementById("day");
+        const hourSelect = document.getElementById("hour");
+        const quoteResult = document.getElementById("quoteResult");
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        const detailsContainer = document.getElementById("detailsContainer");
+
+        // Slider elements
+        const payoutSlider = document.getElementById("payoutAmount");
+        const payoutValue = document.getElementById("payoutValue");
+        const thresholdSlider = document.getElementById("weatherThreshold");
+        const thresholdValue = document.getElementById("thresholdValue");
+        const thresholdDescription = document.getElementById("thresholdDescription");
+
+        let selectedCourse = null;
+        let cachedWeatherData = null; // Cache for weather data
+
+        // Combobox logic
+        function filterCourseList(query) {
+            const matches = Object.keys(courses)
+                .filter(name => name.toLowerCase().includes(query.toLowerCase()))
+                .slice(0, 30);
+
+            courseComboList.innerHTML = matches.length
+                ? matches.map((name, idx) => `<li class="px-4 py-2 hover:bg-green-100 cursor-pointer" tabindex="0" role="option" data-course="${name}" aria-selected="false">${name}</li>`).join('')
+                : `<li class="px-4 py-2 text-gray-400">No results</li>`;
+
+            courseComboList.classList.toggle('hidden', matches.length === 0);
+        }
+
+        courseCombo.addEventListener('input', e => {
+            filterCourseList(e.target.value);
+            courseComboList.classList.remove('hidden');
+            selectedCourse = null;
+            cachedWeatherData = null; // Clear cache when course changes
+        });
+
+        // Mouse selection
+        courseComboList.addEventListener('mousedown', e => {
+            if (e.target.dataset.course) {
+                courseCombo.value = e.target.dataset.course;
+                selectedCourse = e.target.dataset.course;
+                courseComboList.classList.add('hidden');
+            }
+        });
+
+        // Keyboard navigation
+        courseCombo.addEventListener('keydown', function(e) {
+            const items = courseComboList.querySelectorAll('li[role=option]');
+            let index = Array.from(items).findIndex(li => li.getAttribute('aria-selected') === 'true');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                index = index < items.length - 1 ? index + 1 : 0;
+                items.forEach(li => li.setAttribute('aria-selected', 'false'));
+                if (items[index]) items[index].setAttribute('aria-selected', 'true');
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                index = index > 0 ? index - 1 : items.length - 1;
+                items.forEach(li => li.setAttribute('aria-selected', 'false'));
+                if (items[index]) items[index].setAttribute('aria-selected', 'true');
+            } else if (e.key === 'Enter') {
+                if (index !== -1 && items[index]) {
+                    courseCombo.value = items[index].dataset.course;
+                    selectedCourse = items[index].dataset.course;
+                    courseComboList.classList.add('hidden');
+                }
+            }
+        });
+
+        // Hide list on blur
+        courseCombo.addEventListener('blur', () => setTimeout(() => courseComboList.classList.add('hidden'), 100));
+
+        // Clear cache when date/time changes
+        monthSelect.addEventListener('change', () => cachedWeatherData = null);
+        daySelect.addEventListener('change', () => cachedWeatherData = null);
+        hourSelect.addEventListener('change', () => cachedWeatherData = null);
+
+        // Update payout display when slider moves
+        payoutSlider.addEventListener("input", function() {
+            payoutValue.textContent = this.value;
+            if (cachedWeatherData) {
+                recalculateQuote(); // Recalculate using cached data
+            }
+        });
+
+        // Update threshold display and description when slider moves
+        thresholdSlider.addEventListener("input", function() {
+            const value = parseInt(this.value);
+            thresholdValue.textContent = value;
+            
+            // Update description based on threshold
+            let description = "";
+            if (value >= 80) {
+                description = "Only the best! If the weather isn't perfect, we'll need some compensation";
+            } else if (value >= 70) {
+                description = "We like our golf comfortable - sunshine and light breezes only, please";
+            } else if (value >= 60) {
+                description = "Fair weather golfers who draw the line at moderate discomfort";
+            } else if (value >= 50) {
+                description = "We're reasonable golfers who expect decent conditions";
+            } else if (value >= 40) {
+                description = "We'll play through most conditions, but there are limits";
+            } else if (value >= 30) {
+                description = "We're hardy and we're playing the Links, we expect some pain";
+            } else if (value >= 20) {
+                description = "Weather is just another hazard - bring it on!";
+            } else {
+                description = "We'd play in a hurricane if the course was open";
+            }
+            
+            thresholdDescription.textContent = `"${description}"`;
+            
+            if (cachedWeatherData) {
+                recalculateQuote(); // Recalculate using cached data
+            }
+        });
+
+        function round(val, digits = 1) {
+            return Math.round(val * 10 ** digits) / 10 ** digits;
+        }
+
+        // Remove the old populateCourses function since we're using combobox now
+
+        // Updated weather scoring formula - less harsh
+        function calculateWeatherScore(temp, rain, wind) {
+            const idealTemp = 21;
+            const idealRain = 0;
+            const idealWind = 5;
+            
+            // Less harsh penalties
+            const tempPenalty = Math.min(Math.abs(temp - idealTemp) * 1.5, 30);
+            const rainPenalty = Math.min(rain * 7, 50); // Reduced from 10 to 7
+            const windPenalty = Math.min(Math.max(wind - idealWind, 0) * 1, 40); // Only penalize wind above ideal
+            
+            const score = 100 - (tempPenalty + rainPenalty + windPenalty);
+            return Math.max(0, Math.min(100, score));
+        }
+
+        // Populate months
+        for (let i = 0; i < 12; i++) {
+            const opt = document.createElement("option");
+            opt.value = (i + 1).toString().padStart(2, '0');
+            opt.text = new Date(0, i).toLocaleString('default', { month: 'long' });
+            monthSelect.appendChild(opt);
+        }
+
+        // Populate days
+        for (let i = 1; i <= 31; i++) {
+            const opt = document.createElement("option");
+            opt.value = i.toString().padStart(2, '0');
+            opt.text = i;
+            daySelect.appendChild(opt);
+        }
+
+        // Populate hours
+        for (let i = 7; i <= 21; i++) {
+            const opt = document.createElement("option");
+            opt.value = i.toString().padStart(2, '0');
+            opt.text = `${i}:00`;
+            hourSelect.appendChild(opt);
+        }
+
+        // Updated weather scoring formula - less harsh
+        function calculateWeatherScore(temp, rain, wind) {
+            const idealTemp = 21;
+            const idealRain = 0;
+            const idealWind = 5;
+            
+            // Less harsh penalties
+            const tempPenalty = Math.min(Math.abs(temp - idealTemp) * 1.5, 30);
+            const rainPenalty = Math.min(rain * 7, 50); // Reduced from 10 to 7
+            const windPenalty = Math.min(Math.max(wind - idealWind, 0) * 1, 40); // Only penalize wind above ideal
+            
+            const score = 100 - (tempPenalty + rainPenalty + windPenalty);
+            return Math.max(0, Math.min(100, score));
+        }
+
+        // Function to recalculate quote using cached data
+        function recalculateQuote() {
+            if (!cachedWeatherData || cachedWeatherData.length === 0) return;
+
+            const course = selectedCourse || courseCombo.value;
+            const month = monthSelect.value;
+            const day = daySelect.value;
+            const hour = hourSelect.value;
+
+            // Analyze weather data with new threshold
+            const badWeatherThreshold = parseInt(thresholdSlider.value);
+            const badWeatherDays = cachedWeatherData.filter(day => day.score < badWeatherThreshold);
+            const chanceOfBadWeather = (badWeatherDays.length / cachedWeatherData.length) * 100;
+
+            // Pricing model with new payout amount
+            const baseRate = parseInt(payoutSlider.value);
+            const riskMultiplier = 2;
+            const seasonalAdjustment = (parseInt(month) >= 11 || parseInt(month) <= 3) ? 1.5 : 1;
+            
+            const premium = Math.max(10, Math.ceil(
+                (chanceOfBadWeather / 100) * baseRate * riskMultiplier * seasonalAdjustment
+            ));
+
+            // Calculate averages
+            const avgTemp = cachedWeatherData.reduce((sum, day) => sum + day.temp, 0) / cachedWeatherData.length;
+            const avgRain = cachedWeatherData.reduce((sum, day) => sum + day.rain, 0) / cachedWeatherData.length;
+            const avgWind = cachedWeatherData.reduce((sum, day) => sum + day.wind, 0) / cachedWeatherData.length;
+
+            // Display results
+            if (premium > 200) {
+                quoteResult.innerHTML = `
+                    <div class="text-amber-700">
+                        <p class="font-bold mb-2 text-lg">Sorry, we can't offer insurance for ${course}</p>
+                        <p class="mb-2">Date: ${month}-${day} @ ${hour}:00</p>
+                        
+                        <div class="mt-4 bg-amber-50 p-4 rounded">
+                            <p class="mb-2">With a <span class="font-bold">${round(chanceOfBadWeather)}%</span> chance of bad weather, the risk is just too high for us to offer affordable coverage.</p>
+                            <p class="font-semibold text-amber-800">But we believe in you! 🏌️</p>
+                            <p class="text-sm mt-2">Pack your rain gear and embrace the elements. Some of golf's greatest stories happen in challenging conditions!</p>
+                            
+                            <div class="mt-4 bg-amber-100 p-3 rounded">
+                                <p class="font-semibold mb-1 text-amber-900">Weather Risk Analysis:</p>
+                                <ul class="list-disc list-inside text-sm">
+                                    <li>Bad Weather Probability: <span class="font-bold">${round(chanceOfBadWeather)}%</span></li>
+                                    <li>Avg. Temperature: ${round(avgTemp, 1)}°C</li>
+                                    <li>Avg. Rainfall: ${round(avgRain, 2)} mm</li>
+                                    <li>Avg. Wind Speed: ${round(avgWind, 1)} km/h</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                quoteResult.innerHTML = `
+                    <div class="text-green-900">
+                        <p class="font-bold mb-2">Quote for ${course}</p>
+                        <p>Date: ${month}-${day} @ ${hour}:00</p>
+                        
+                        <div class="mt-4 bg-green-50 p-3 rounded">
+                            <p class="font-semibold mb-1">Weather Risk Analysis:</p>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>Bad Weather Probability: <span class="font-bold">${round(chanceOfBadWeather)}%</span></li>
+                                <li>Avg. Temperature: ${round(avgTemp, 1)}°C</li>
+                                <li>Avg. Rainfall: ${round(avgRain, 2)} mm</li>
+                                <li>Avg. Wind Speed: ${round(avgWind, 1)} km/h</li>
+                            </ul>
+                        </div>
+
+                        <p class="text-xl font-bold text-green-700 mt-4">Premium: €${premium}</p>
+                        <small class="text-green-600 block mt-2">Guaranteed €${baseRate} payout if weather score drops below ${badWeatherThreshold}</small>
+                        
+                        <button onclick="showPurchaseModal()" class="mt-4 w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">
+                            Buy Insurance
+                        </button>
+                    </div>
+                `;
+            }
+
+            // Update detailed analysis
+            updateDetailedAnalysis(cachedWeatherData, badWeatherThreshold);
+        }
+
+        function updateDetailedAnalysis(weatherData, badWeatherThreshold) {
+            // Calculate mean and median scores
+            const sortedScores = weatherData.map(d => d.score).sort((a, b) => a - b);
+            const meanScore = weatherData.reduce((sum, d) => sum + d.score, 0) / weatherData.length;
+            const medianScore = sortedScores.length % 2 === 0
+                ? (sortedScores[sortedScores.length / 2 - 1] + sortedScores[sortedScores.length / 2]) / 2
+                : sortedScores[Math.floor(sortedScores.length / 2)];
+
+            // Sort weather data by score to get best and worst years
+            const sortedWeatherData = [...weatherData].sort((a, b) => a.score - b.score);
+            const worst5Years = sortedWeatherData.slice(0, 5);
+            const best5Years = sortedWeatherData.slice(-5).reverse();
+
+            detailsContainer.innerHTML = `
+                <div class="mt-8 p-4 sm:p-6 bg-white rounded-lg shadow-md border border-green-200">
+                    <h3 class="text-lg sm:text-xl font-bold text-green-900 mb-4">Detailed Historical Analysis</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div class="bg-green-50 p-4 rounded">
+                            <p class="font-semibold text-green-800 text-sm sm:text-base">Mean Weather Score</p>
+                            <p class="text-xl sm:text-2xl font-bold text-green-700">${round(meanScore, 1)}</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded">
+                            <p class="font-semibold text-green-800 text-sm sm:text-base">Median Weather Score</p>
+                            <p class="text-xl sm:text-2xl font-bold text-green-700">${round(medianScore, 1)}</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-red-700 mb-2 text-sm sm:text-base">5 Worst Weather Years</h4>
+                            <div class="space-y-2">
+                                ${worst5Years.map(data => `
+                                    <div class="bg-red-50 p-2 rounded text-xs sm:text-sm">
+                                        <span class="font-semibold">${data.year}:</span> 
+                                        Score ${round(data.score, 1)} 
+                                        <span class="text-xs text-gray-600 block sm:inline">
+                                            (${round(data.temp, 1)}°C, ${round(data.rain, 1)}mm rain, ${round(data.wind, 1)}km/h wind)
+                                        </span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-700 mb-2 text-sm sm:text-base">5 Best Weather Years</h4>
+                            <div class="space-y-2">
+                                ${best5Years.map(data => `
+                                    <div class="bg-green-50 p-2 rounded text-xs sm:text-sm">
+                                        <span class="font-semibold">${data.year}:</span> 
+                                        Score ${round(data.score, 1)}
+                                        <span class="text-xs text-gray-600 block sm:inline">
+                                            (${round(data.temp, 1)}°C, ${round(data.rain, 1)}mm rain, ${round(data.wind, 1)}km/h wind)
+                                        </span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-xs sm:text-sm text-gray-600">
+                        <p><strong>Note:</strong> Weather scores range from 0-100. Scores below ${badWeatherThreshold} trigger insurance payout.</p>
+                        <p>Based on ${weatherData.length} years of historical data (1979-2024).</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Rate limiting helper
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function fetchWithRetry(url, maxRetries = 3, delayMs = 1000) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url);
+                    if (response.status === 429) {
+                        // Rate limited, wait longer
+                        console.log(`Rate limited, waiting ${delayMs * (i + 1)}ms before retry...`);
+                        await delay(delayMs * (i + 1));
+                        continue;
+                    }
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    await delay(delayMs);
+                }
+            }
+        }
+
+        async function getQuote() {
+            // Clear any previous details
+            detailsContainer.innerHTML = '';
+            
+            // Show loading spinner with fun messages
+            const loadingMessages = [
+                "Polishing our balls...",
+                "Teeing up our shot...",
+                "Testing our swing...",
+                "Checking the wind direction...",
+                "Inspecting the greens...",
+                "Calibrating our clubs...",
+                "Reading the fairway...",
+                "Analyzing the rough...",
+                "Measuring the bunkers...",
+                "Calculating your slice..."
+            ];
+            
+            let messageIndex = 0;
+            quoteResult.innerHTML = `
+                <div class="text-green-700">
+                    <div class="mb-2" id="loadingMessage">${loadingMessages[messageIndex]}</div>
+                    <div class="w-8 h-8 border-4 border-green-200 border-t-green-600 rounded-full loading-spinner mx-auto"></div>
+                </div>
+            `;
+            
+            // Cycle through loading messages
+            const messageInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                const loadingMessageEl = document.getElementById('loadingMessage');
+                if (loadingMessageEl) {
+                    loadingMessageEl.textContent = loadingMessages[messageIndex];
+                }
+            }, 2000);
+
+            const course = selectedCourse || courseCombo.value;
+            
+            // Check if we have a valid course
+            if (!courses[course]) {
+                clearInterval(messageInterval);
+                quoteResult.innerHTML = `<div class="text-red-600">Please select a valid golf course from the list.</div>`;
+                return;
+            }
+            
+            const { lat, lon } = courses[course];
+            const month = monthSelect.value;
+            const day = daySelect.value;
+            const hour = hourSelect.value;
+
+            // Check if we have cached data for this exact query
+            const cacheKey = `${course}-${month}-${day}-${hour}`;
+            if (cachedWeatherData && cachedWeatherData.cacheKey === cacheKey) {
+                clearInterval(messageInterval);
+                recalculateQuote();
+                return;
+            }
+
+            const weatherData = [];
+            const years = [];
+            
+            // Create list of years to fetch
+            for (let year = 1979; year <= 2024; year++) {
+                years.push(year);
+            }
+
+            // Process in smaller batches to avoid rate limits
+            const batchSize = 5;
+            const delayBetweenBatches = 1000; // 1 second delay between batches
+
+            try {
+                for (let i = 0; i < years.length; i += batchSize) {
+                    const batch = years.slice(i, i + batchSize);
+                    const batchPromises = batch.map(async (year) => {
+                        const date = new Date(year, parseInt(month) - 1, parseInt(day));
+                        const yyyy = date.getFullYear();
+                        const mm = (date.getMonth() + 1).toString().padStart(2, '0');
+                        const dd = date.getDate().toString().padStart(2, '0');
+                        const fullDate = `${yyyy}-${mm}-${dd}`;
+                        
+                        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${fullDate}&end_date=${fullDate}&hourly=temperature_2m,precipitation,windspeed_10m&timezone=Europe%2FDublin`;
+
+                        try {
+                            const data = await fetchWithRetry(url);
+                            if (data && data.hourly && data.hourly.time) {
+                                const i = data.hourly.time.findIndex(t => t.includes(`T${hour}:00`));
+                                if (i !== -1) {
+                                    const temp = data.hourly.temperature_2m[i];
+                                    const rain = data.hourly.precipitation[i];
+                                    const wind = data.hourly.windspeed_10m[i];
+
+                                    const score = calculateWeatherScore(temp, rain, wind);
+                                    weatherData.push({
+                                        year,
+                                        temp,
+                                        rain,
+                                        wind,
+                                        score
+                                    });
+                                }
+                            }
+                        } catch (error) {
+                            console.error(`Error fetching data for year ${year}:`, error);
+                        }
+                    });
+
+                    await Promise.all(batchPromises);
+                    
+                    // Add delay between batches if not the last batch
+                    if (i + batchSize < years.length) {
+                        await delay(delayBetweenBatches);
+                    }
+                }
+
+                // Clear the loading message interval
+                clearInterval(messageInterval);
+
+                if (weatherData.length === 0) {
+                    quoteResult.innerHTML = `
+                        <div class="text-red-600">
+                            No weather data available for ${course} on ${month}-${day} @ ${hour}:00.
+                            <br><small>This might be due to API limits. Please try again in a moment.</small>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Cache the weather data with a key
+                cachedWeatherData = weatherData;
+                cachedWeatherData.cacheKey = `${course}-${month}-${day}-${hour}`;
+
+                // Show data collection summary
+                console.log(`Successfully collected data for ${weatherData.length} out of ${years.length} years`);
+
+                // Calculate and display quote
+                recalculateQuote();
+
+                if (weatherData.length === 0) {
+                    quoteResult.innerHTML = `
+                        <div class="text-red-600">
+                            No weather data available for ${course} on ${month}-${day} @ ${hour}:00.
+                            <br><small>This might be due to API limits. Please try again in a moment.</small>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Show data collection summary
+                console.log(`Successfully collected data for ${weatherData.length} out of ${years.length} years`);
+
+                // Analyze weather data
+                const badWeatherThreshold = parseInt(thresholdSlider.value);
+                const badWeatherDays = weatherData.filter(day => day.score < badWeatherThreshold);
+                const chanceOfBadWeather = (badWeatherDays.length / weatherData.length) * 100;
+
+                // Pricing model
+                const baseRate = parseInt(payoutSlider.value); // User-selected payout
+                const riskMultiplier = 2; // Margin for risk and administration
+                const seasonalAdjustment = (parseInt(month) >= 11 || parseInt(month) <= 3) ? 1.5 : 1;
+                
+                const premium = Math.max(10, Math.ceil(
+                    (chanceOfBadWeather / 100) * baseRate * riskMultiplier * seasonalAdjustment
+                ));
+
+                // Calculate averages
+                const avgTemp = weatherData.reduce((sum, day) => sum + day.temp, 0) / weatherData.length;
+                const avgRain = weatherData.reduce((sum, day) => sum + day.rain, 0) / weatherData.length;
+                const avgWind = weatherData.reduce((sum, day) => sum + day.wind, 0) / weatherData.length;
+
+                // Check if premium is too high
+                if (premium > 200) {
+                    quoteResult.innerHTML = `
+                        <div class="text-amber-700">
+                            <p class="font-bold mb-2 text-lg">Sorry, we can't offer insurance for ${course}</p>
+                            <p class="mb-2">Date: ${month}-${day} @ ${hour}:00</p>
+                            
+                            <div class="mt-4 bg-amber-50 p-4 rounded">
+                                <p class="mb-2">With a <span class="font-bold">${round(chanceOfBadWeather)}%</span> chance of bad weather, the risk is just too high for us to offer affordable coverage.</p>
+                                <p class="font-semibold text-amber-800">But we believe in you! 🏌️</p>
+                                <p class="text-sm mt-2">Pack your rain gear and embrace the elements. Some of golf's greatest stories happen in challenging conditions!</p>
+                                
+                                <div class="mt-4 bg-amber-100 p-3 rounded">
+                                    <p class="font-semibold mb-1 text-amber-900">Weather Risk Analysis:</p>
+                                    <ul class="list-disc list-inside text-sm">
+                                        <li>Bad Weather Probability: <span class="font-bold">${round(chanceOfBadWeather)}%</span></li>
+                                        <li>Avg. Temperature: ${round(avgTemp, 1)}°C</li>
+                                        <li>Avg. Rainfall: ${round(avgRain, 2)} mm</li>
+                                        <li>Avg. Wind Speed: ${round(avgWind, 1)} km/h</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    quoteResult.innerHTML = `
+                        <div class="text-green-900">
+                            <p class="font-bold mb-2">Quote for ${course}</p>
+                            <p>Date: ${month}-${day} @ ${hour}:00</p>
+                            
+                            <div class="mt-4 bg-green-50 p-3 rounded">
+                                <p class="font-semibold mb-1">Weather Risk Analysis:</p>
+                                <ul class="list-disc list-inside text-sm">
+                                    <li>Bad Weather Probability: <span class="font-bold">${round(chanceOfBadWeather)}%</span></li>
+                                    <li>Avg. Temperature: ${round(avgTemp, 1)}°C</li>
+                                    <li>Avg. Rainfall: ${round(avgRain, 2)} mm</li>
+                                    <li>Avg. Wind Speed: ${round(avgWind, 1)} km/h</li>
+                                </ul>
+                            </div>
+
+                            <p class="text-xl font-bold text-green-700 mt-4">Premium: €${premium}</p>
+                            <small class="text-green-600 block mt-2">Guaranteed €${baseRate} payout if weather score drops below ${badWeatherThreshold}</small>
+                            
+                            <button onclick="showPurchaseModal()" class="mt-4 w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">
+                                Buy Insurance
+                            </button>
+                        </div>
+                    `;
+                }
+
+                // Add detailed analysis for ALL quotes (including high-risk ones)
+                // Calculate mean and median scores
+                const sortedScores = weatherData.map(d => d.score).sort((a, b) => a - b);
+                const meanScore = weatherData.reduce((sum, d) => sum + d.score, 0) / weatherData.length;
+                const medianScore = sortedScores.length % 2 === 0
+                    ? (sortedScores[sortedScores.length / 2 - 1] + sortedScores[sortedScores.length / 2]) / 2
+                    : sortedScores[Math.floor(sortedScores.length / 2)];
+
+                // Sort weather data by score to get best and worst years
+                const sortedWeatherData = [...weatherData].sort((a, b) => a.score - b.score);
+                const worst5Years = sortedWeatherData.slice(0, 5);
+                const best5Years = sortedWeatherData.slice(-5).reverse();
+
+                detailsContainer.innerHTML = `
+                    <div class="mt-8 p-6 bg-white rounded-lg shadow-md border border-green-200">
+                        <h3 class="text-xl font-bold text-green-900 mb-4">Detailed Historical Analysis</h3>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-green-50 p-4 rounded">
+                                <p class="font-semibold text-green-800">Mean Weather Score</p>
+                                <p class="text-2xl font-bold text-green-700">${round(meanScore, 1)}</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded">
+                                <p class="font-semibold text-green-800">Median Weather Score</p>
+                                <p class="text-2xl font-bold text-green-700">${round(medianScore, 1)}</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">5 Worst Weather Years</h4>
+                                <div class="space-y-2">
+                                    ${worst5Years.map(data => `
+                                        <div class="bg-red-50 p-2 rounded text-sm">
+                                            <span class="font-semibold">${data.year}:</span> 
+                                            Score ${round(data.score, 1)} 
+                                            <span class="text-xs text-gray-600">
+                                                (${round(data.temp, 1)}°C, ${round(data.rain, 1)}mm rain, ${round(data.wind, 1)}km/h wind)
+                                            </span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-green-700 mb-2">5 Best Weather Years</h4>
+                                <div class="space-y-2">
+                                    ${best5Years.map(data => `
+                                        <div class="bg-green-50 p-2 rounded text-sm">
+                                            <span class="font-semibold">${data.year}:</span> 
+                                            Score ${round(data.score, 1)}
+                                            <span class="text-xs text-gray-600">
+                                                (${round(data.temp, 1)}°C, ${round(data.rain, 1)}mm rain, ${round(data.wind, 1)}km/h wind)
+                                            </span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p><strong>Note:</strong> Weather scores range from 0-100. Scores below 55 trigger insurance payout.</p>
+                            <p>Based on ${weatherData.length} years of historical data (1979-2024).</p>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                // Clear the loading message interval
+                clearInterval(messageInterval);
+
+                quoteResult.innerHTML = `
+                    <div class="text-red-600">
+                        Error calculating quote. Please try again later.
+                        <br>
+                        <small>${error.message}</small>
+                    </div>
+                `;
+            }
+        }
+
+        // Modal functions
+        function showPurchaseModal() {
+            document.getElementById('purchaseModal').classList.remove('hidden');
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').classList.add('hidden');
+            document.getElementById('emailForm').reset();
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+
+        // Email form submission
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            
+            // In a real application, you would send this to your backend
+            console.log('Email submitted:', email);
+            
+            // Show success message
+            document.getElementById('successMessage').classList.remove('hidden');
+            document.getElementById('emailForm').style.display = 'none';
+            
+            // Close modal after 3 seconds
+            setTimeout(() => {
+                closePurchaseModal();
+                document.getElementById('emailForm').style.display = 'block';
+            }, 3000);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('purchaseModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePurchaseModal();
+            }
+        });
+
+        // Initial population of courses
+        populateCourses();
+    </script>
+</body>
+</html>
